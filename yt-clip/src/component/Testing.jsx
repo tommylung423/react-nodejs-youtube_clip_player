@@ -18,13 +18,48 @@ export const Testing = () => {
     songService
       .getSongs(songlists[0]._id)
       .then((s) => {
-        setSongs(...songs, s);
+        setSongs(s);
       })
       .catch((error) => console.log(error.message));
   }
 
+  function handleAddClick() {
+    let data = {
+      name: "song1",
+      urlid: "fasd123",
+      start: "2",
+      end: "20",
+      listid: "60817dc8e566a324d906c728",
+    };
+    songService
+      .addSongs(data)
+      .then(() => {
+        handleClick();
+      })
+      .catch((error) => console.log(error.message));
+  }
   useEffect(() => {
     console.log(songs);
   }, [songs]);
-  return <Button onClick={handleClick}> get list </Button>;
+
+  function AddList() {
+    let data = {
+      name: "songlist1",
+      uid: "60817c83e566a324d906c727",
+    };
+    songService
+      .addSongLists(data)
+      .then(() => {
+        handleClick();
+      })
+      .catch((error) => console.log(error.message));
+  }
+
+  return (
+    <>
+      <Button onClick={handleClick}> get list </Button>
+      <Button onClick={handleAddClick}> add song </Button>
+      <Button onClick={AddList}> add songlist </Button>
+    </>
+  );
 };

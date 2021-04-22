@@ -3,7 +3,9 @@ import axios from "axios";
 
 export const songService = {
     getSongLists,  
-    getSongs,    
+    getSongs, 
+    addSongs,
+    addSongLists   
 };
 const API_URL = "http://localhost:8000/api";
 const axiosConfig = {
@@ -22,9 +24,10 @@ async function getSongLists(uid) {
     }
 }
 
-async function getSongs(id) {
-    try {        
-        const res = await axios.get(`${API_URL}/songs/${id}` , axiosConfig);
+async function addSongLists(name, uid) {
+    try {
+              
+        const res = await axios.post(`${API_URL}/songlists/`,{name,uid} , axiosConfig);
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         return res.data
     } catch (err) {
@@ -33,9 +36,21 @@ async function getSongs(id) {
     }
 }
 
-async function addSongs(id) {
+async function getSongs(id) {
     try {        
-        const res = await axios.post(`${API_URL}/songs/${id}` , axiosConfig);
+        const res = await axios.get(`${API_URL}/songs/${id}` , axiosConfig);
+
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        return res.data
+    } catch (err) {
+        console.log(err.response.data);
+        throw  new Error(err.response.data);
+    }
+}
+
+async function addSongs(song) {
+    try {        
+        const res = await axios.post(`${API_URL}/songs/${song.listid}`,song , axiosConfig);
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         return res.data
     } catch (err) {
