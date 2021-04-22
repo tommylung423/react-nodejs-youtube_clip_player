@@ -1,0 +1,29 @@
+
+.header{
+    background-image: linear-gradient(#000, hsla(0, 0%, 0%, 0.7)), url("../../img/homeimage.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+
+}
+.hero-text-box{
+    position: absolute;
+    width: 1140px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: aliceblue;
+}
+.hero-text-box h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 300%;
+    word-spacing: 4px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+}

@@ -1,0 +1,63 @@
+.background{
+  background-color: #d8d8d842;
+  width: 100%;
+  margin-top: 0;
+  flex-grow : 1;
+  height: 100%;
+
+}
+.form-container {
+    margin: 0px auto ;    
+    width: 100%;
+    position: relative;
+    height:100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+    
+  .form-content-left {
+    background-image: linear-gradient(#000, hsla(0, 0%, 0%, 0.5)), url("../img/takeout.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;    
+  }
+    
+ 
+  
+  .form-content-right {
+    padding-top: 30vh;  
+    position: relative;
+    background: linear-gradient(90deg, rgb(40, 40, 40) 0%, rgb(17, 17, 17) 100%);
+  }
+  
+  .form-size {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }  
+  .form-content-right h1{
+    color: #fff;
+    font-size: 60px;
+    font-weight: 600%;
+  }
+
+
+
+  /* ------------------------------ */
+
+  @media all  and (max-width: 1024px) {
+    .form-container{
+      grid-template-columns:none;
+      overflow: visible;
+
+    }
+    .form-content-left {
+        display: none;
+    }
+    .form-container .form-content-right{
+      display:block;
+      width: 100%;  }
+}
+  
