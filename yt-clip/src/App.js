@@ -12,7 +12,7 @@ import {Testing} from './component/Testing'
 import {PersistGate} from 'redux-persist/lib/integration/react';
 import {store, persistor} from './_helpers/store'
 import PrivateRoute from './component/PrivateRoute'
-
+import SongListPage from './component/SongList/SongListPage';
 
 function App() {   
 
@@ -29,7 +29,10 @@ function App() {
         <PublicRoute restricted={true} path="/Register"  component={RegisterPage}/>
         <PublicRoute restricted={true} path="/Login" component={myLoginForm}/>
         <PublicRoute restricted={false} path="/Home" component={HomePage}/>
+        
         <PrivateRoute path="/test"  component={Testing}   />
+        <PrivateRoute path="/songlistpage"  component={SongListPage}   />
+
         <Redirect to="/not-found" />
         </Switch >  
         </div>

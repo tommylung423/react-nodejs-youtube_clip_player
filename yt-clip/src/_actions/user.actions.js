@@ -54,7 +54,6 @@ function logout() {
 function getSongLists(uid) {
     return dispatch => {
         dispatch(request());
-
         songService.getSongLists(uid)
         .then(
             songlists => { 
@@ -63,7 +62,6 @@ function getSongLists(uid) {
         ).catch(error =>{
             dispatch(failure(error.message));}) 
     };
-
     function request() { return { type: userConstants.GETLIST_REQUEST } }
     function success(songlists) { return { type: userConstants.GETLIST_SUCCESS, payload: songlists } }
     function failure(error) { return { type: userConstants.GETLIST_FAILURE, error } }

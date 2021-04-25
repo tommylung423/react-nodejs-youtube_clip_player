@@ -1,12 +1,17 @@
 import { authHeader } from '../_helpers';
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { userActions } from "../_actions";
 
 export const songService = {
     getSongLists,  
     getSongs, 
     addSongs,
-    addSongLists   
+    addSongLists,
+    delSongLists,
+    updateSongLists   
 };
+
 const API_URL = "http://localhost:8000/api";
 const axiosConfig = {
     headers: {
@@ -24,11 +29,9 @@ async function getSongLists(uid) {
     }
 }
 
-async function addSongLists(name, uid) {
+async function addSongLists(data) {
     try {
-              
-        const res = await axios.post(`${API_URL}/songlists/`,{name,uid} , axiosConfig);
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        const res = await axios.post(`${API_URL}/songlists/`,data , axiosConfig);        
         return res.data
     } catch (err) {
         console.log(err.response.data);
@@ -36,10 +39,30 @@ async function addSongLists(name, uid) {
     }
 }
 
+async function delSongLists(id) {
+    try {
+        const res = await axios.delete(`${API_URL}/songlists/${id}`, axiosConfig);
+        return res.data
+    } catch (err) {
+        console.log(err.response.data);
+        throw  new Error(err.response.data);
+    }
+}
+
+async function updateSongLists(songlist) {
+    try {
+        const res = await axios.put(`${API_URL}/songlists/${songlist._id}`, songlist , axiosConfig);
+        return res.data
+    } catch (err) {
+        console.log(err.response.data);
+        throw  new Error(err.response.data);
+    }
+}
+ 
+
 async function getSongs(id) {
     try {        
         const res = await axios.get(`${API_URL}/songs/${id}` , axiosConfig);
-
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         return res.data
     } catch (err) {

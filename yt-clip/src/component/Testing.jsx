@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Alert } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { userActions } from "../_actions";
 import { authHeader } from "../_helpers";
 import { songService } from "../_services";
+import SongListPage from "./SongList/SongListPage";
 export const Testing = () => {
   const songlists = useSelector((state) => state.songlists.items);
   const uid = useSelector((state) => state.authentication.user._id);
@@ -25,32 +26,32 @@ export const Testing = () => {
 
   function handleAddClick() {
     let data = {
-      name: "song1",
+      name: "1111",
       urlid: "fasd123",
       start: "2",
       end: "20",
-      listid: "60817dc8e566a324d906c728",
+      listid: "60847cf53eb6d12034a05b89",
     };
     songService
       .addSongs(data)
       .then(() => {
-        handleClick();
+        dispatch(userActions.getSongLists(uid));
       })
       .catch((error) => console.log(error.message));
   }
-  useEffect(() => {
-    console.log(songs);
-  }, [songs]);
+  // useEffect(() => {
+  //   console.log(songs);
+  // }, [songs]);
 
   function AddList() {
     let data = {
-      name: "songlist1",
+      name: "songlist8",
       uid: "60817c83e566a324d906c727",
     };
     songService
       .addSongLists(data)
       .then(() => {
-        handleClick();
+        dispatch(userActions.getSongLists(uid));
       })
       .catch((error) => console.log(error.message));
   }
@@ -60,6 +61,8 @@ export const Testing = () => {
       <Button onClick={handleClick}> get list </Button>
       <Button onClick={handleAddClick}> add song </Button>
       <Button onClick={AddList}> add songlist </Button>
+      <SongListPage />
+      <Alert>This is a alert—check it out!</Alert>
     </>
   );
 };
