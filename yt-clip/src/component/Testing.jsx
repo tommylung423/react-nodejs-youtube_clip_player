@@ -1,68 +1,50 @@
 import React, { useState, useEffect } from "react";
-import { Button, Alert } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { userActions } from "../_actions";
-import { authHeader } from "../_helpers";
 import { songService } from "../_services";
-import SongListPage from "./SongList/SongListPage";
+import Drag from "./PlayPage/Drag";
+import Popup from "./common/popup";
+import SongForm from "./common/songForm";
 export const Testing = () => {
   const songlists = useSelector((state) => state.songlists.items);
   const uid = useSelector((state) => state.authentication.user._id);
   const [songs, setSongs] = useState([]);
-
-  const token = authHeader();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const [fetchSongs] = await Promise.all([
+        songService.getSongs("6087dbdc8354c946201e60c6"),
+      ]);
+      setSongs(fetchSongs);
+      console.log(fetchSongs);
+    };
+    fetchData();
+  }, [songlists]);
 
   function handleClick() {
     dispatch(userActions.getSongLists(uid));
-    songService
-      .getSongs(songlists[0]._id)
-      .then((s) => {
-        setSongs(s);
-      })
-      .catch((error) => console.log(error.message));
+    console.log(songs);
   }
 
-  function handleAddClick() {
-    let data = {
-      name: "1111",
-      urlid: "fasd123",
-      start: "2",
-      end: "20",
-      listid: "60847cf53eb6d12034a05b89",
-    };
-    songService
-      .addSongs(data)
-      .then(() => {
-        dispatch(userActions.getSongLists(uid));
-      })
-      .catch((error) => console.log(error.message));
-  }
-  // useEffect(() => {
-  //   console.log(songs);
-  // }, [songs]);
-
-  function AddList() {
-    let data = {
-      name: "songlist8",
-      uid: "60817c83e566a324d906c727",
-    };
-    songService
-      .addSongLists(data)
-      .then(() => {
-        dispatch(userActions.getSongLists(uid));
-      })
-      .catch((error) => console.log(error.message));
+  function addsong(e, req) {
+    e.preventDefault();
+    songService.addSongs(req);
+    dispatch(userActions.getSongLists(uid));
   }
 
   return (
     <>
       <Button onClick={handleClick}> get list </Button>
-      <Button onClick={handleAddClick}> add song </Button>
-      <Button onClick={AddList}> add songlist </Button>
-      <SongListPage />
-      <Alert>This is a alert—check it out!</Alert>
+      <Popup
+        name="Add Song"
+        title="Add Song"
+        pop={<SongForm addsong={addsong} listid={"6087dbdc8354c946201e60c6"} />}
+      />
+
+      <Drag songs={songs} listid={"6087dbdc8354c946201e60c6"} />
     </>
   );
 };

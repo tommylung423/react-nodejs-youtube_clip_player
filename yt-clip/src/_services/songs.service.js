@@ -1,7 +1,6 @@
 import { authHeader } from '../_helpers';
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { userActions } from "../_actions";
+
 
 export const songService = {
     getSongLists,  
@@ -9,7 +8,10 @@ export const songService = {
     addSongs,
     addSongLists,
     delSongLists,
-    updateSongLists   
+    updateSongLists,
+    sortSongs,
+    delSongs,
+    updateSongs   
 };
 
 const API_URL = "http://localhost:8000/api";
@@ -63,7 +65,6 @@ async function updateSongLists(songlist) {
 async function getSongs(id) {
     try {        
         const res = await axios.get(`${API_URL}/songs/${id}` , axiosConfig);
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
         return res.data
     } catch (err) {
         console.log(err.response.data);
@@ -73,7 +74,7 @@ async function getSongs(id) {
 
 async function addSongs(song) {
     try {        
-        const res = await axios.post(`${API_URL}/songs/${song.listid}`,song , axiosConfig);
+        const res = await axios.post(`${API_URL}/songs/`,song , axiosConfig);
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         return res.data
     } catch (err) {
@@ -82,4 +83,36 @@ async function addSongs(song) {
     }
 }
 
+async function sortSongs(id,song) {
+    try {        
+        const res = await axios.put(`${API_URL}/songs/${id}`,song , axiosConfig);
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        return res.data
+    } catch (err) {
+        console.log(err.response.data);
+        throw  new Error(err.response.data);
+    }
+}
+
+async function delSongs(id,song) {
+    try {        
+        const res = await axios.delete(`${API_URL}/songs/${id}` , axiosConfig);
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        return res.data
+    } catch (err) {
+        console.log(err.response.data);
+        throw  new Error(err.response.data);
+    }
+}
+
+async function updateSongs(id,song) {
+    try {        
+        const res = await axios.put(`${API_URL}/songs/updatesong/${id}`, song , axiosConfig);
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        return res.data
+    } catch (err) {
+        console.log(err.response.data);
+        throw  new Error(err.response.data);
+    }
+}
 

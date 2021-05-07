@@ -1,0 +1,48 @@
+
+.songs {
+    list-style: none;
+    padding-left: 0;
+    height:500px;
+    overflow:auto
+  }
+  
+  .songs li {
+    display: flex;
+    align-items: center;
+    border: solid 2px #d0d0d0;
+    border-radius: .2em;
+    padding: .5em .8em .5em .5em;
+    margin-bottom: 1em;
+  }
+  
+  .songs p {
+    max-width: none;
+    font-weight: bold;
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .songs-thumb {
+    overflow: hidden;    
+    margin-right: 1.5em;
+
+  }
+  
+  .songs-thumb img {
+    display: inline-block;    
+    width: 100%;
+    vertical-align: middle;
+  }
+
+  .icon-area{
+    position: relative;
+    display: grid;
+    width: 100%;
+    height: 100%
+  }
+  .icon-area .right{
+    position: absolute;
+    right:0;
+    top: -20px
+  }
+

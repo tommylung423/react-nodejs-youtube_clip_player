@@ -13,7 +13,7 @@ import {PersistGate} from 'redux-persist/lib/integration/react';
 import {store, persistor} from './_helpers/store'
 import PrivateRoute from './component/PrivateRoute'
 import SongListPage from './component/SongList/SongListPage';
-
+import { PlayPage } from './component/PlayPage/PlayPage';
 function App() {   
 
     return (
@@ -31,6 +31,7 @@ function App() {
         <PublicRoute restricted={false} path="/Home" component={HomePage}/>
         
         <PrivateRoute path="/test"  component={Testing}   />
+        <PrivateRoute path="/songlistpage/:songlist"  component={PlayPage}   />
         <PrivateRoute path="/songlistpage"  component={SongListPage}   />
 
         <Redirect to="/not-found" />

@@ -1,4 +1,3 @@
-import { authHeader } from '../_helpers';
 import axios from "axios";
 
 export const userService = {
@@ -8,11 +7,7 @@ export const userService = {
     
 };
 const API_URL = "http://localhost:8000/api";
-const axiosConfig = {
-    headers: {
-        'token':`${authHeader()}`,        
-    }
-  };
+
 async function register(name,email, password) { 
     try {
         const res = await axios.post(`${API_URL}/users`, {name,email, password });

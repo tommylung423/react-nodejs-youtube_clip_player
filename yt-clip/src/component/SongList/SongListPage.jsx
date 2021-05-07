@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { songService } from "../../_services";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -6,9 +6,8 @@ import { userActions } from "../../_actions";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import Popup from "./../common/popup";
 import SongListForm from "./../common/songListForm";
-import { history } from "./../../_helpers/history";
 import SongListCard from "./SongListCard";
-export default function SongListPage() {
+export default function SongListPage(props) {
   const songlists = useSelector((state) => state.songlists.items);
   const uid = useSelector((state) => state.authentication.user._id);
   const dispatch = useDispatch();
@@ -17,11 +16,11 @@ export default function SongListPage() {
 
   function goSong(songlist) {
     console.log(songlist);
-    history.replace(`/test/${songlist._id}`);
+    props.history.push(`/songlistpage/${songlist._id}`);
   }
 
   function handleDelete(songlist) {
-    if (window.confirm("Are you sure you wish to delete this songlist?")) {
+    if (window.confirm("Are you sure to delete this songlist?")) {
       songService
         .delSongLists(songlist._id)
         .then(() => {
@@ -35,7 +34,7 @@ export default function SongListPage() {
 
   function handleUpdate(e, newname, songlist) {
     e.preventDefault();
-    if (newname == "") {
+    if (newname === "") {
       setErrormessage("Please enter a songlist name!");
       return;
     }

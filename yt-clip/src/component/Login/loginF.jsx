@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
 import { userActions } from "../../_actions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -10,8 +9,6 @@ export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const history = useHistory();
   const authentication = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
 
@@ -68,12 +65,7 @@ export default function Login() {
                   </Form.Group>
                 </div>
                 <div className="w-100 text-center mt-2">
-                  <Button
-                    disabled={loading}
-                    className="w-35"
-                    size="lg"
-                    type="submit"
-                  >
+                  <Button className="w-35" size="lg" type="submit">
                     Sign In
                   </Button>
                 </div>
