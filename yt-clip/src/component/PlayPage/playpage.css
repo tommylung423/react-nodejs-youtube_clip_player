@@ -1,0 +1,96 @@
+.wrapper {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-auto-rows: repeat(3, 1fr);
+
+    grid-template-areas:
+    "box1 box1 box2 "
+    "box1 box1 box2 "
+    "box1 box1 box2 ";
+
+
+  }
+
+  .box1 {
+    grid-area: box1;
+    margin-left: 5vh;   
+    margin-right: 5vh;  
+    display: grid;
+    grid-auto-rows: 0.2fr 1.2fr 0.1fr;
+  }
+  /* .box .subbox{
+      width:  85%;
+  } */
+
+  .box1 .subbox-2{
+    width: 100%;
+    height: auto;
+    
+  }
+
+   .react-player{
+    margin-left: auto;
+    margin-right: auto;
+
+  } 
+
+
+  .box1 img{
+    width: 100%;   
+    margin-top: 5em;
+  }
+
+.box2 {
+    grid-area: box2;
+    margin-top: 10px; 
+    margin-left: auto;   
+    margin-right: auto;   
+    min-width: 400px;
+    max-width: 450px;
+    border-radius: 20px;
+    background-color: #3d526d;
+    color: #ffffffe7;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(199, 0, 0, 0.24);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows: 40px 1fr;
+    grid-template-areas:
+    ". b2s1 b2s2 "
+    "aside aside aside "
+    "aside aside aside ";
+
+}
+
+.box2 .subbox-1{
+  grid-area: b2s1;
+}
+
+.box2 .subbox-1 h3{
+  color: rgb(134, 9, 9);
+}
+
+
+.box2 .subbox-2{
+  grid-area: b2s2;
+}
+
+.box2 .subbox-2 svg{
+  font-size: 100,
+}
+
+.box2 .aside{
+  grid-area: aside;
+}
+
+@media only screen and (max-width: 1000px) {
+    .wrapper {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+      grid-template-areas:
+        "box1"
+        "box2"
+       ;
+    }
+  }

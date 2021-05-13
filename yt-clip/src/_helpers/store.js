@@ -16,13 +16,13 @@ const persistConfig = {
  
 const myPersistReducer = persistReducer(persistConfig, rootReducer)
 
-const loggerMiddleware = createLogger();
+// const loggerMiddleware = createLogger();
 
 export const store = createStore(
     myPersistReducer,
     composeWithDevTools(applyMiddleware(
         thunkMiddleware,
-        loggerMiddleware
+        // loggerMiddleware
     ))
 );
 

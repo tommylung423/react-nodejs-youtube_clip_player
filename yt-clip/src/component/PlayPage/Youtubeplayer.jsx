@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactPlayer from "react-player/youtube";
-import "./player.css";
+import "./playpage.css";
+
 function Youtubeplayer(props) {
   const { volume, handleNext, index } = props;
   const [url, seturl] = useState("");
@@ -16,8 +17,8 @@ function Youtubeplayer(props) {
   return (
     <ReactPlayer
       className="react-player"
-      width="95%"
-      height="90%"
+      width="80%"
+      height="100%"
       url={url}
       volume={volume / 100}
       onEnded={() => handleNext(index)}

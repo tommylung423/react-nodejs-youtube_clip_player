@@ -14,6 +14,7 @@ import {store, persistor} from './_helpers/store'
 import PrivateRoute from './component/PrivateRoute'
 import SongListPage from './component/SongList/SongListPage';
 import { PlayPage } from './component/PlayPage/PlayPage';
+import ErrorBoundary from './component/ErrorBoundary'
 function App() {   
 
     return (
@@ -25,6 +26,7 @@ function App() {
         <div className="box">
         <TopNavBar /> 
         <div className="body">
+
         <Switch >               
         <PublicRoute restricted={true} path="/Register"  component={RegisterPage}/>
         <PublicRoute restricted={true} path="/Login" component={myLoginForm}/>
@@ -36,6 +38,8 @@ function App() {
 
         <Redirect to="/not-found" />
         </Switch >  
+
+
         </div>
         </div>
         </PersistGate>

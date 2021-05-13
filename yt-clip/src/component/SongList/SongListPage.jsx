@@ -3,7 +3,7 @@ import { songService } from "../../_services";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../_actions";
-import { Card, Container, Row, Col } from "react-bootstrap";
+import { Card, Container, Row, Col, Button } from "react-bootstrap";
 import Popup from "./../common/popup";
 import SongListForm from "./../common/songListForm";
 import SongListCard from "./SongListCard";
@@ -61,12 +61,16 @@ export default function SongListPage(props) {
       .then(() => {
         dispatch(userActions.getSongLists(uid));
         console.log("Document successfully written!");
-        setShow(!show);
+        setShow(false);
         setErrormessage("");
       })
       .catch((error) => {
         setErrormessage(error.message.toString());
       });
+  }
+
+  function onHide() {
+    setShow(false);
   }
 
   return (
@@ -97,11 +101,14 @@ export default function SongListPage(props) {
                   Add a new songlist
                 </Card.Title>
                 <div style={{ paddingTop: "0.5em" }}>
+                  <Button variant="primary" onClick={() => setShow(true)}>
+                    Add Song List
+                  </Button>
                   <Popup
-                    name="Add Song List"
                     title="Add Song List"
                     pop={SongListForm({ submitData, errormessage })}
                     show={show}
+                    onHide={onHide}
                   />
                 </div>
               </Card.Body>

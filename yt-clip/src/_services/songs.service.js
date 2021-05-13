@@ -86,7 +86,6 @@ async function addSongs(song) {
 async function sortSongs(id,song) {
     try {        
         const res = await axios.put(`${API_URL}/songs/${id}`,song , axiosConfig);
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
         return res.data
     } catch (err) {
         console.log(err.response.data);

@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
+import ErrorBoundary from "./ErrorBoundary";
 
 export default function PrivateRoute({ component: Component, ...rest }) {
   const currentUser = useSelector((state) => state.authentication.loggedIn);
@@ -9,7 +10,9 @@ export default function PrivateRoute({ component: Component, ...rest }) {
       {...rest}
       render={(props) => {
         return currentUser ? (
-          <Component {...props} />
+          <ErrorBoundary>
+            <Component {...props} />
+          </ErrorBoundary>
         ) : (
           <Redirect to="/login" />
         );

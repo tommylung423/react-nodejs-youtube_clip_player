@@ -32,7 +32,6 @@ function Drag(props) {
         .delSongs(id)
         .then(() => {
           dispatch(userActions.getSongLists(uid));
-          props.indexRemove(index);
         })
         .catch((error) => console.log(error.message));
     }
@@ -111,24 +110,28 @@ function Drag(props) {
                               className="icon-area"
                               style={{ cursor: "pointer" }}
                             >
-                              <div className="right">
-                                <Popup
-                                  name="Add Song List"
-                                  title="Add Song"
-                                  pop={
-                                    <SongForm
-                                      song={song}
-                                      listid={song.listid}
-                                      submitData={submitData}
-                                    />
-                                  }
-                                  show={show}
-                                  mode="FileText"
-                                />
-                                <Icon.TrashFill
-                                  style={smallIcon}
-                                  onClick={() => removeSong(song._id, index)}
-                                />
+                              <div className="icon-group">
+                                <div className="top">
+                                  <Popup
+                                    name="Add Song List"
+                                    title="Add Song"
+                                    pop={
+                                      <SongForm
+                                        song={song}
+                                        listid={song.listid}
+                                        submitData={submitData}
+                                      />
+                                    }
+                                    show={show}
+                                    mode="FileText"
+                                  />
+                                </div>
+                                <div className="bottom">
+                                  <Icon.TrashFill
+                                    style={smallIcon}
+                                    onClick={() => removeSong(song._id, index)}
+                                  />
+                                </div>
                               </div>
                             </div>
                           </li>
