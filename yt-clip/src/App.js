@@ -23,7 +23,6 @@ function App() {
         <PersistGate loading={null} persistor={persistor}>
 
 
-        <div className="box">
         <TopNavBar /> 
         <div className="body">
 
@@ -40,7 +39,6 @@ function App() {
         </Switch >  
 
 
-        </div>
         </div>
         </PersistGate>
         </Provider>

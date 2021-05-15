@@ -49,7 +49,8 @@
     min-width: 400px;
     max-width: 450px;
     border-radius: 20px;
-    background-color: #3d526d;
+    background: linear-gradient(to right, #c0c0aa, #1cefff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     color: #ffffffe7;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(199, 0, 0, 0.24);
 
@@ -69,16 +70,34 @@
 
 .box2 .subbox-1 h3{
   color: rgb(134, 9, 9);
+  justify-content: center;
+  text-align: center;
+  margin-top: auto;
+margin-bottom: auto;
 }
 
 
 .box2 .subbox-2{
   grid-area: b2s2;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
-.box2 .subbox-2 svg{
-  font-size: 100,
+.box2 .subbox-2 .button{
+font-size: 1.75em;
+margin-top: auto;
+margin-bottom: auto;
+padding-right: 0.2em;
+margin-right: 0.1em;
 }
+
+.box2 .subbox-2 .button:hover{
+  color: #9ca0a5;
+
+  }
+
+
 
 .box2 .aside{
   grid-area: aside;

@@ -14,7 +14,7 @@ export const songService = {
     updateSongs   
 };
 
-const API_URL = "http://localhost:8000/api";
+const API_URL = "https://clip-nodejs.herokuapp.com/api";
 const axiosConfig = {
     headers: {
         'token':`${authHeader()}`,        

@@ -107,11 +107,11 @@ export const PlayPage = (props) => {
 
         <div className="box2">
           <div className="subbox-1">
-            {songs.length && (
+            {songs.length ?(
               <h3>
                 {index + 1}/{songs.length}
               </h3>
-            )}
+            ):(<h3>0</h3>)}
           </div>
           <div className="subbox-2">
             <Popup
@@ -121,13 +121,13 @@ export const PlayPage = (props) => {
               onHide={onHide}
             />
 
-            <Icon.PlusSquareFill
+            <Icon.PlusSquareFill className="button"
               onClick={() => {
                 setShow(true);
               }}
             ></Icon.PlusSquareFill>
 
-            <Icon.Shuffle onClick={() => shuffle(songs)}> </Icon.Shuffle>
+            <Icon.Shuffle className="button" onClick={() => shuffle(songs)}> </Icon.Shuffle>
           </div>
 
           <div className="aside">
