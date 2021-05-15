@@ -3,7 +3,7 @@ import "./home.css";
 
 export const HomePage = () => {
   return (
-    <div className="home">
+    <div className="header">
       <div className="hero-text-box">
         <h1>
           This is a react/nodejs practice website for youtube clip player <br />

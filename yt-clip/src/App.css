@@ -1,6 +1,10 @@
-.body{
+.box{
   height: 100%;
   width: 100%;
-  overflow-x: hidden;
   
+}
+.box .body{
+  height: 93vh;
+  width: 100%;
+  overflow-x: hidden;
 }
