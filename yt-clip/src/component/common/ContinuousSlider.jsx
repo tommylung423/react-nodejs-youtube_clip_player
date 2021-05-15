@@ -14,6 +14,10 @@ const useStyles = makeStyles({
 
 export default function ContinuousSlider({ handleChange, value }) {
   const classes = useStyles();
+<<<<<<< HEAD
+=======
+
+>>>>>>> a83ad60a090e58a9f8ed852680bc5625ab544dac
   return (
     <div className={classes.root}>
       <Typography id="continuous-slider" gutterBottom>

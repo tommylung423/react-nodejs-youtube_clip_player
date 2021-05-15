@@ -6,6 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter} from "react-router-dom"
 import { Provider } from 'react-redux';
+<<<<<<< HEAD
+=======
+
+>>>>>>> a83ad60a090e58a9f8ed852680bc5625ab544dac
 import { store } from './_helpers';
 
 
@@ -15,8 +19,12 @@ ReactDOM.render(
     <Provider store={store}>
     <BrowserRouter><App /></BrowserRouter>
     </Provider>
+<<<<<<< HEAD
   </React.StrictMode>
   ,
+=======
+  </React.StrictMode>,
+>>>>>>> a83ad60a090e58a9f8ed852680bc5625ab544dac
   document.getElementById('root')
 );
 
