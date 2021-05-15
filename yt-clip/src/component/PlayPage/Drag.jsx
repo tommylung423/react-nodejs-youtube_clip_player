@@ -46,7 +46,6 @@ function Drag(props) {
     items.splice(result.destination.index, 0, reorderedItem);
     setSongs(items);
     items.map((s) => req.songs.push(s._id));
-    console.log(props.listid);
     songService
       .sortSongs(props.listid, req)
       .then(dispatch(userActions.getSongLists(uid)))

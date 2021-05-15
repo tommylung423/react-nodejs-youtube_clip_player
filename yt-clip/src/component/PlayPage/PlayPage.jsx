@@ -38,9 +38,8 @@ export const PlayPage = (props) => {
         setSongs(song);
       }
     });
-    if (songs.length - 1 >= index) {
-      setIndex(songs.length - 2);
-      index < 0 && setIndex(0);
+    if (index >= songs.length - 2) {
+      setIndex(0);
     }
     return () => {
       mounted = false;
