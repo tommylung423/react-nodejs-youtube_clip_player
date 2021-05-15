@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 
@@ -14,15 +13,6 @@ const SongListForm = (props) => {
 
   return (
     <Form onSubmit={(e) => props.submitData(e, songList, props.song)}>
-=======
-import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
-const SongListForm = (props) => {
-  const [songList, setSongList] = useState("");
-
-  return (
-    <Form onSubmit={(e) => props.submitData(e, props.song, songList)}>
->>>>>>> a83ad60a090e58a9f8ed852680bc5625ab544dac
       <Form.Group controlId="songList">
         <Form.Label>Song List Name</Form.Label>
         <Form.Control
@@ -45,15 +35,12 @@ const SongListForm = (props) => {
       >
         Submit
       </Button>
-<<<<<<< HEAD
       {show && (
         <Alert variant="danger">
           <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
           <p>{props.errormessage}</p>
         </Alert>
       )}
-=======
->>>>>>> a83ad60a090e58a9f8ed852680bc5625ab544dac
     </Form>
   );
 };

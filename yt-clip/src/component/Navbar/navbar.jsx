@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React from "react";
-=======
-import React, { useState } from "react";
->>>>>>> a83ad60a090e58a9f8ed852680bc5625ab544dac
 import { Navbar, Nav, Button } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
 import { NavLink } from "react-router-dom";
@@ -69,11 +65,7 @@ const NavBar = () => {
               </NavLink>
             </Nav>
             <Nav style={divStyle}>
-<<<<<<< HEAD
               <NavLink to="/songlistpage">
-=======
-              <NavLink to="/songlist">
->>>>>>> a83ad60a090e58a9f8ed852680bc5625ab544dac
                 {" "}
                 <Icon.PersonPlus style={smallIcon} />
                 Song

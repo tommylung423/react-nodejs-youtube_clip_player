@@ -12,10 +12,6 @@ export default function Signup() {
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const [error, setError] = useState("");
-<<<<<<< HEAD
-=======
-  const [loading, setLoading] = useState(false);
->>>>>>> a83ad60a090e58a9f8ed852680bc5625ab544dac
   const authentication = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
 
@@ -99,16 +95,7 @@ export default function Signup() {
                   </Form.Group>
                 </div>
                 <div className="w-100 text-center mt-2">
-<<<<<<< HEAD
                   <Button className="w-35" size="lg" type="submit">
-=======
-                  <Button
-                    disabled={loading}
-                    className="w-35"
-                    size="lg"
-                    type="submit"
-                  >
->>>>>>> a83ad60a090e58a9f8ed852680bc5625ab544dac
                     Sign Up
                   </Button>
                 </div>
