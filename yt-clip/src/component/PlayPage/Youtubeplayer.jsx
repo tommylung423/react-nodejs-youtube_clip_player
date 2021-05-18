@@ -1,38 +1,44 @@
 import React, { useState, useEffect } from "react";
-import ReactPlayer from "react-player/youtube";
+import YouTube from "@u-wave/react-youtube";
 import "./playpage.css";
 
 function Youtubeplayer(props) {
-  const { volume, handleNext, index } = props;
+  const { handleNext, index, song, volume } = props;
   const [url, seturl] = useState("");
+  const [start, setStart] = useState(0);
 
   useEffect(() => {
-    seturl(``);
-    seturl(
-      `https://www.youtube.com/watch?v=${props.song.urlid}?start=${props.song.start}&end=${props.song.end}`
-    );
-    console.log(props.song);
-  }, [props]);
+    var patt = new RegExp("^(http(s)?://)?((w){3}.)?youtu(be|.be)?(.com)?/.+");
+    seturl(null);
+    setTimeout(() => {
+      if (patt.test(song.url)) {
+        const arr = song.url.split(
+          /(vi\/|v%3D|v=|\/v\/|youtu\.be\/|\/embed\/)/
+        );
+        const urlid = arr[2] ? arr[2].split(/[^\w-]/i)[0] : "";
+        seturl(urlid);
+        setStart(song.start + 0.1);
+      }
+    }, 100);
+  }, [props.song._id, song]);
 
   return (
-    <ReactPlayer
-      className="react-player"
-      width="80%"
-      height="100%"
-      url={url}
-      volume={volume / 100}
-      onEnded={() => handleNext(index)}
-      controls={true}
-      config={{
-        youtube: {
-          playerVars: {
-            controls: 0,
-            disablekb: 1,
-            origin: "http://localhost:3000",
-          },
-        },
-      }}
-    />
+    <>
+      <YouTube
+        height="100%"
+        width="100%"
+        id={song._id}
+        video={url}
+        paused={false}
+        volume={volume / 100}
+        controls={false}
+        autoplay
+        onPlaying={() => props.onPlay()}
+        onEnd={() => handleNext(index)}
+        startSeconds={start}
+        endSeconds={song.end}
+      />
+    </>
   );
 }
 

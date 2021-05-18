@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, Col } from "react-bootstrap";
 import "../../css/songform.css";
 import Cleave from "cleave.js/react";
-import moment from "moment";
 
 function SongForm(props) {
   const [url, setUrl] = useState("");
@@ -20,7 +19,7 @@ function SongForm(props) {
       setStartTime(song.start);
       setEndTime(song.end);
       setSongTitle(song.name);
-      setUrl("https://www.youtube.com/watch?v=" + song.urlid);
+      setUrl(song.url);
     }
   }, [song]);
 
@@ -29,17 +28,13 @@ function SongForm(props) {
     return arr[2] ? arr[2].split(/[^\w-]/i)[0] : "";
   }
 
-  function getYouTubeStart(url) {
-    const VID_REGEX = /(^.*?(youtu.be\/|v\/|u\/\w\/|embed\/|watchv=|v=)([^#?]*)(?:(\?t|&start)=(\d+))?.*)/;
-    const sec = url.match(VID_REGEX) ? url.match(VID_REGEX)[5] : null;
-
-    const hhmmss = toHHMMSS(sec);
-    console.log(hhmmss);
-
-    if (!hhmmss.includes("NaN")) {
-      console.log(sec);
-      setStartTime(sec);
+  function getStart(url) {
+    let starttime = url.split("t=")[1];
+    if (starttime && starttime.includes(":")) {
+      starttime = countSeconds(starttime);
     }
+    console.log(starttime);
+    return setStartTime(parseInt(starttime));
   }
 
   function toHHMMSS(secs) {
@@ -52,7 +47,14 @@ function SongForm(props) {
       .join(":");
   }
   function countSeconds(str) {
-    const [hh = "0", mm = "0", ss = "0"] = str.split(":");
+    var count = (str.match(/:/g) || []).length;
+    var [hh = "0", mm = "0", ss = "0"] = "";
+    if (count === 1) {
+      [mm = "0", ss = "0", hh = "0"] = str.split(":");
+    }
+    if (count === 2) {
+      [hh = "0", mm = "0", ss = "0"] = str.split(":");
+    }
     const hour = parseInt(hh, 10) || 0;
     const minute = parseInt(mm, 10) || 0;
     const second = parseInt(ss, 10) || 0;
@@ -79,12 +81,6 @@ function SongForm(props) {
         if (songTitle === "") {
           setSongTitle(responseJson.items[0].snippet.title);
         }
-        if (endTime.length < 8) {
-          var d = moment
-            .duration(responseJson.items[0].contentDetails.duration)
-            .asSeconds();
-          console.log(d);
-        }
       }
     } catch (error) {
       console.error(error);
@@ -96,13 +92,9 @@ function SongForm(props) {
     <div className="song-form">
       <Form
         onSubmit={(e) => {
-          if (startTime === "") {
-            setStartTime("0");
-          }
-          endTime === "" && setEndTime("0");
           let req = {
             name: songTitle,
-            urlid: urlid,
+            url: url,
             start: startTime,
             end: endTime,
             listid: listid,
@@ -119,7 +111,7 @@ function SongForm(props) {
             placeholder="https://www.youtube.com/watch?v="
             onChange={(e) => {
               setUrlid(getYouTubeId(e.target.value));
-              getYouTubeStart(e.target.value);
+              getStart(e.target.value);
               setUrl(e.target.value);
             }}
             onBlur={() => getYoutubeDetail(urlid, API_KEY)}
@@ -133,7 +125,6 @@ function SongForm(props) {
             <Form.Label>id</Form.Label>
             <Form.Control disabled value={urlid} />
           </Form.Group>
-
           <Form.Group as={Col} controlId="formSong">
             <Form.Label>歌名</Form.Label>
             <Form.Control

@@ -2,19 +2,20 @@
 .songs {
     list-style: none;
     padding-left: 0;
-    height: 65vh;
-    overflow:auto;
-
-
+    height: 100%;
   }
   
   .songs li {
-    min-height: 20%;
     display: grid;
     grid-template-columns: 0.8fr 0.8fr 0.1fr;
-    border: solid 2px #d0d0d0;
+    border: solid 2px #a1a4d1;
     border-radius: .2em;
     padding: .5em .8em .5em .5em;
+    min-height: 100px;
+  }
+
+  .songs li:hover{
+    border: solid 5px rgb(32, 30, 30);
   }
   
   .songs p {
@@ -23,17 +24,31 @@
     text-align: justify;
     margin: auto;    
   }
-  
-  .songs-thumb {
-    overflow: hidden;    
-    margin-right: 1.5em;
+
+  .songs p:hover {
+    color: rgb(32, 30, 30);
   }
   
-  .songs-thumb img {
-    display: block ;    
-    width: 100%;
-    vertical-align: middle;
+  .songs-thumb {
+    margin-right: 1.5em;
+    position: relative;
 
+  }
+  
+  .songs-thumb .react-player__preview
+  {
+    opacity: 1;  
+  }
+
+ 
+
+  .songs-thumb:hover .react-player__preview
+  {
+    opacity: 0.5;
+  }
+
+  .songs-thumb:hover .triangle{
+    opacity: 1;
   }
 
   .icon-area{
@@ -52,24 +67,14 @@
 
   }
 
+  .icon-area .smallIcon{
+    font-size: 30px;
+    margin-bottom: 5px;
+  }
+  .icon-area .smallIcon:hover{
+    color: rgb(32, 30, 30);
+
+  }
 
 
-  /* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888; 
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}

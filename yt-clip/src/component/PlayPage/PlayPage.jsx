@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./youtubeplayer.css";
 import "./playpage.css";
 import _ from "lodash";
 import Popup from "../common/popup";
@@ -12,7 +11,6 @@ import { userActions } from "../../_actions";
 import { songService } from "./../../_services";
 import { useDispatch } from "react-redux";
 import fakeplayer from "../../img/fakeplayer.png";
-import { Button } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
 export const PlayPage = (props) => {
   const uid = useSelector((state) => state.authentication.user._id);
@@ -23,6 +21,8 @@ export const PlayPage = (props) => {
   const [index, setIndex] = useState(0);
   const [songs, setSongs] = useState([]);
   const [show, setShow] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const [bug, setBug] = useState(false);
 
   function handleChange(e, newValue) {
     setVolume(newValue);
@@ -30,7 +30,6 @@ export const PlayPage = (props) => {
   function handlePlay(index) {
     setIndex(index);
   }
-
   useEffect(() => {
     let mounted = true;
     songService.getSongs(songlistid).then((song) => {
@@ -44,27 +43,52 @@ export const PlayPage = (props) => {
     return () => {
       mounted = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [songlistid, items]);
 
   function onHide() {
     setShow(false);
   }
+  function handlebug() {
+    setBug(true);
+  }
 
-  //搵下一個index去play
-  //run in onended
   function handleNext(index) {
-    let nextindex = index + 1;
-    if (nextindex >= songs.length) {
-      nextindex = 0;
+    console.log(bug);
+    if (bug) {
+      let nextindex = index + 1;
+      if (nextindex >= songs.length) {
+        nextindex = 0;
+      }
+      setIndex(nextindex);
+      setPlaying(true);
+      setBug(false);
+      console.log("123");
     }
-    return setIndex(nextindex);
   }
 
   function addsong(e, req) {
     e.preventDefault();
-    songService.addSongs(req);
-    dispatch(userActions.getSongLists(uid));
+    if (parseInt(req.start) > parseInt(req.end) && parseInt(req.end) !== 0) {
+      alert("End time must be larger than start time");
+      return;
+    }
+    songService
+      .addSongs(req)
+      .then(dispatch(userActions.getSongLists(uid)))
+      .catch((error) => console.log(error.message));
     setShow(false);
+  }
+
+  function removeSong(id, index) {
+    if (window.confirm("Are you sure to delete this song?")) {
+      songService
+        .delSongs(id)
+        .then(() => {
+          dispatch(userActions.getSongLists(uid));
+        })
+        .catch((error) => console.log(error.message));
+    }
   }
 
   function shuffle(songs) {
@@ -91,8 +115,10 @@ export const PlayPage = (props) => {
                 <Youtubeplayer
                   song={songs[index]}
                   handleNext={handleNext}
+                  onPlay={handlebug}
                   index={index}
                   volume={volume}
+                  playing={playing}
                 />
               </div>
               <div className="subbox-3">
@@ -106,11 +132,13 @@ export const PlayPage = (props) => {
 
         <div className="box2">
           <div className="subbox-1">
-            {songs.length ?(
+            {songs.length ? (
               <h3>
                 {index + 1}/{songs.length}
               </h3>
-            ):(<h3>0</h3>)}
+            ) : (
+              <h3>0</h3>
+            )}
           </div>
           <div className="subbox-2">
             <Popup
@@ -120,17 +148,25 @@ export const PlayPage = (props) => {
               onHide={onHide}
             />
 
-            <Icon.PlusSquareFill className="button"
+            <Icon.PlusSquareFill
+              className="button"
               onClick={() => {
                 setShow(true);
               }}
             ></Icon.PlusSquareFill>
 
-            <Icon.Shuffle className="button" onClick={() => shuffle(songs)}> </Icon.Shuffle>
+            <Icon.Shuffle className="button" onClick={() => shuffle(songs)}>
+              {" "}
+            </Icon.Shuffle>
           </div>
 
           <div className="aside">
-            <Drag songs={songs} listid={songlistid} handlePlay={handlePlay} />
+            <Drag
+              songs={songs}
+              listid={songlistid}
+              handlePlay={handlePlay}
+              removeSong={removeSong}
+            />
           </div>
         </div>
       </div>

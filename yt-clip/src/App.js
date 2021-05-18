@@ -14,7 +14,6 @@ import {store, persistor} from './_helpers/store'
 import PrivateRoute from './component/PrivateRoute'
 import SongListPage from './component/SongList/SongListPage';
 import { PlayPage } from './component/PlayPage/PlayPage';
-import ErrorBoundary from './component/ErrorBoundary'
 function App() {   
 
     return (
@@ -24,14 +23,14 @@ function App() {
 
 
         <TopNavBar /> 
-        <div className="body">
+        <div className="main-body">
 
         <Switch >               
         <PublicRoute restricted={true} path="/Register"  component={RegisterPage}/>
         <PublicRoute restricted={true} path="/Login" component={myLoginForm}/>
         <PublicRoute restricted={false} path="/Home" component={HomePage}/>
         
-        <PrivateRoute path="/test"  component={Testing}   />
+        {/* <PrivateRoute path="/test"  component={Testing}   /> */}
         <PrivateRoute path="/songlistpage/:songlist"  component={PlayPage}   />
         <PrivateRoute path="/songlistpage"  component={SongListPage}   />
 

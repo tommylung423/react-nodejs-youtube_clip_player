@@ -94,7 +94,7 @@ const NavBar = () => {
           ) : (
             <Nav>
               <Nav>
-                <NavLink to="/Profile">
+                <NavLink to="/Home">
                   <Icon.PersonCircle style={bigIcon} />
                 </NavLink>
               </Nav>
