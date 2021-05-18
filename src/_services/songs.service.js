@@ -15,7 +15,8 @@ export const songService = {
 };
 // const API_URL = "http://localhost:8000/api";
 
-const API_URL = "https://clip-nodejs.herokuapp.com/api";
+// const API_URL = "https://clip-nodejs.herokuapp.com/api";
+const API_URL = "https://main-test-au-dyoyl6odci8iiu2c-gtw.qovery.io/api";
 
 const axiosConfig = {
     headers: {

@@ -7,8 +7,9 @@ export const userService = {
     
 };
 // const API_URL = "http://localhost:8000/api";
+const API_URL = "https://main-test-au-dyoyl6odci8iiu2c-gtw.qovery.io/api";
 
-const API_URL = "https://clip-nodejs.herokuapp.com/api";
+// const API_URL = "https://clip-nodejs.herokuapp.com/api";
 async function register(name,email, password) { 
     try {
         const res = await axios.post(`${API_URL}/users`, {name,email, password });
