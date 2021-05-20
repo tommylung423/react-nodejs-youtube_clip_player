@@ -179,7 +179,7 @@ export const PlayPage = (props) => {
           </div>
         </div>
       ) : (
-        <div class="loader">Loading...</div>
+        <div className="loader">Loading...</div>
       )}
     </React.Fragment>
   );

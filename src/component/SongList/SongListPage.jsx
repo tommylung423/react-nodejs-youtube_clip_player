@@ -10,6 +10,8 @@ import SongListCard from "./SongListCard";
 import "./loading.css";
 export default function SongListPage(props) {
   const songlists = useSelector((state) => state.songlists.items);
+  const error = useSelector((state) => state.songlists.error);
+
   const uid = useSelector((state) => state.authentication.user._id);
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
@@ -20,16 +22,17 @@ export default function SongListPage(props) {
     console.log(songlist);
     props.history.push(`/songlistpage/${songlist._id}`);
   }
-
   useEffect(() => {
     if (!songlists) dispatch(userActions.getSongLists(uid));
   }, []);
 
   useEffect(() => {
-    if (!songlists) dispatch(userActions.getSongLists(uid));
     if (songlists) setLoad(true);
   }, [songlists]);
 
+  useEffect(() => {
+    if (error === "Invalid token.") window.location.reload();
+  }, [error]);
   function handleDelete(songlist) {
     if (window.confirm("Are you sure to delete this songlist?")) {
       songService
@@ -127,7 +130,7 @@ export default function SongListPage(props) {
           </Container>
         </div>
       ) : (
-        <div class="loader">Loading...</div>
+        <div className="loader">Loading...</div>
       )}
 
       {show && (

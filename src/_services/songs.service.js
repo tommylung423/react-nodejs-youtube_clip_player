@@ -29,7 +29,7 @@ async function getSongLists(uid) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         return res.data
     } catch (err) {
-        console.log(err.response.data);
+        // console.log(err.response.data);
         throw  new Error(err.response.data);
     }
 }

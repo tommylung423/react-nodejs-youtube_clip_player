@@ -119,10 +119,10 @@ function SongForm(props) {
         </Form.Group>
 
         <Form.Row>
-          <Form.Group as={Col} controlId="formId">
+          {/* <Form.Group as={Col} controlId="formId">
             <Form.Label>id</Form.Label>
             <Form.Control disabled value={urlid} />
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group as={Col} controlId="formSong">
             <Form.Label>歌名</Form.Label>
             <Form.Control

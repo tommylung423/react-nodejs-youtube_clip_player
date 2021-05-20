@@ -25,7 +25,8 @@ function App() {
         <TopNavBar /> 
         </div>
         <div className="main-body">
-        <Switch >               
+        <Switch >
+        <PublicRoute restricted={false} path="/"  exact component={HomePage}/>               
         <PublicRoute restricted={true} path="/Register"  component={RegisterPage}/>
         <PublicRoute restricted={true} path="/Login" component={myLoginForm}/>
         <PublicRoute restricted={false} path="/Home" component={HomePage}/>
