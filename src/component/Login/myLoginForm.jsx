@@ -1,6 +1,5 @@
 import React from "react";
-import Login from "./loginF";
-// import "./style2.css";
+import Login from "./login";
 
 export const myLoginForm = () => {
   return <React.Fragment>{<Login />}</React.Fragment>;

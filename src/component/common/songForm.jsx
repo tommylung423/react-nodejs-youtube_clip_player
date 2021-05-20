@@ -64,7 +64,6 @@ function SongForm(props) {
     let string = e.target.value;
     string.padEnd(8, 0);
     let seconds = countSeconds(e.target.value);
-    console.log(seconds);
     return str === "start" ? setStartTime(seconds) : setEndTime(seconds);
   }
 
@@ -99,7 +98,6 @@ function SongForm(props) {
             end: endTime,
             listid: listid,
           };
-          console.log(req);
           submitData ? submitData(e, req, song._id) : addsong(e, req);
         }}
       >

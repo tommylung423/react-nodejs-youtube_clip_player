@@ -19,6 +19,8 @@ const SongListForm = (props) => {
           type="test"
           placeholder="Enter Song List Name"
           onChange={(e) => setSongList(e.target.value)}
+          required
+          maxLength="20"
         />
       </Form.Group>
 
@@ -29,8 +31,8 @@ const SongListForm = (props) => {
           marginLeft: "Auto",
           marginRight: "Auto",
           display: "block",
-          width: "90px",
-          height: "44px",
+          minWidth: "90px",
+          minHeight: "44px",
         }}
       >
         Submit

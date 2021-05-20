@@ -4,12 +4,14 @@ import { userActions } from "../../_actions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import "../../css/style2.css";
+import { NavLink } from "react-router-dom";
 
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [error, setError] = useState("");
   const authentication = useSelector((state) => state.authentication);
+
   const dispatch = useDispatch();
 
   async function handleSubmit(e) {
@@ -75,6 +77,12 @@ export default function Login() {
                 style={{ color: "#FFFFFF", fontSize: "20px" }}
               >
                 Do not have an account?
+                <NavLink
+                  to="/Register"
+                  style={{ marginLeft: "20px", fontSize: "20px" }}
+                >
+                  Register
+                </NavLink>
               </div>
             </div>
           </div>

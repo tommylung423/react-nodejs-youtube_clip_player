@@ -14,17 +14,17 @@ import {store, persistor} from './_helpers/store'
 import PrivateRoute from './component/PrivateRoute'
 import SongListPage from './component/SongList/SongListPage';
 import { PlayPage } from './component/PlayPage/PlayPage';
+import NotFound from './component/NotFound';
 function App() {   
 
     return (
       <React.Fragment>
         <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-
-
+        <div className="nav-body">
         <TopNavBar /> 
+        </div>
         <div className="main-body">
-
         <Switch >               
         <PublicRoute restricted={true} path="/Register"  component={RegisterPage}/>
         <PublicRoute restricted={true} path="/Login" component={myLoginForm}/>
@@ -33,12 +33,15 @@ function App() {
         {/* <PrivateRoute path="/test"  component={Testing}   /> */}
         <PrivateRoute path="/songlistpage/:songlist"  component={PlayPage}   />
         <PrivateRoute path="/songlistpage"  component={SongListPage}   />
+        <PublicRoute restricted={true} path="/not-found" component={NotFound}/>
 
         <Redirect to="/not-found" />
         </Switch >  
 
 
         </div>
+        {/* </div> */}
+
         </PersistGate>
         </Provider>
       </React.Fragment>

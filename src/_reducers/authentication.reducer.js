@@ -34,6 +34,10 @@ export function authentication(state = initialState, action) {
       return {
         loggedIn: false,
         error: action.error};
+ 
+
+
+        
     default:
       return state
   }

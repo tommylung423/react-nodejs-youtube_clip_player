@@ -12,7 +12,6 @@ const NavBar = () => {
 
   async function handleLogout() {
     dispatch(userActions.logout());
-    console.log(currentUser);
   }
 
   var divStyle = {
@@ -67,8 +66,8 @@ const NavBar = () => {
             <Nav style={divStyle}>
               <NavLink to="/songlistpage">
                 {" "}
-                <Icon.PersonPlus style={smallIcon} />
-                Song
+                <Icon.MusicNote style={smallIcon} />
+                SongList
               </NavLink>
             </Nav>
           </Nav>

@@ -3,7 +3,7 @@ import YouTube from "@u-wave/react-youtube";
 import "./playpage.css";
 
 function Youtubeplayer(props) {
-  const { handleNext, index, song, volume } = props;
+  const { handleNext, index, song, volume, playing } = props;
   const [url, seturl] = useState("");
   const [start, setStart] = useState(0);
 
@@ -32,7 +32,7 @@ function Youtubeplayer(props) {
         paused={false}
         volume={volume / 100}
         controls={false}
-        autoplay
+        autoplay={playing}
         onPlaying={() => props.onPlay()}
         onEnd={() => handleNext(index)}
         startSeconds={start}

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { userActions } from "../../_actions";
 import "../../css/style2.css";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 export default function Signup() {
   const nameRef = useRef();
@@ -105,6 +106,12 @@ export default function Signup() {
                 style={{ color: "#FFFFFF", fontSize: "20px" }}
               >
                 Already have an account?
+                <NavLink
+                  to="/Login"
+                  style={{ marginLeft: "20px", fontSize: "20px" }}
+                >
+                  Login
+                </NavLink>
               </div>
             </div>
           </div>

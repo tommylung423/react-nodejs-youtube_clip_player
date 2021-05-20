@@ -12,6 +12,8 @@ import { songService } from "./../../_services";
 import { useDispatch } from "react-redux";
 import fakeplayer from "../../img/fakeplayer.png";
 import * as Icon from "react-bootstrap-icons";
+import "./loading.css";
+
 export const PlayPage = (props) => {
   const uid = useSelector((state) => state.authentication.user._id);
   const items = useSelector((state) => state.songlists.items);
@@ -21,6 +23,8 @@ export const PlayPage = (props) => {
   const [index, setIndex] = useState(0);
   const [songs, setSongs] = useState([]);
   const [show, setShow] = useState(false);
+  const [load, setLoad] = useState(false);
+
   const [playing, setPlaying] = useState(false);
   const [bug, setBug] = useState(false);
 
@@ -35,6 +39,7 @@ export const PlayPage = (props) => {
     songService.getSongs(songlistid).then((song) => {
       if (mounted) {
         setSongs(song);
+        setLoad(true);
       }
     });
     if (index >= songs.length - 2) {
@@ -63,7 +68,6 @@ export const PlayPage = (props) => {
       setIndex(nextindex);
       setPlaying(true);
       setBug(false);
-      console.log("123");
     }
   }
 
@@ -104,74 +108,80 @@ export const PlayPage = (props) => {
 
   return (
     <React.Fragment>
-      <div className="wrapper">
-        <div className="box1">
-          {songs[index] ? (
-            <>
-              <div className="subbox-1">
-                <h1>{songs[index].name}</h1>
-              </div>
-              <div className="subbox-2">
-                <Youtubeplayer
-                  song={songs[index]}
-                  handleNext={handleNext}
-                  onPlay={handlebug}
-                  index={index}
-                  volume={volume}
-                  playing={playing}
-                />
-              </div>
-              <div className="subbox-3">
-                <ContinuousSlider handleChange={handleChange} value={volume} />
-              </div>
-            </>
-          ) : (
-            <img src={fakeplayer} alt="fakeplayer" />
-          )}
-        </div>
-
-        <div className="box2">
-          <div className="subbox-1">
-            {songs.length ? (
-              <h3>
-                {index + 1}/{songs.length}
-              </h3>
+      {load ? (
+        <div className="wrapper">
+          <div className="box1">
+            {songs[index] ? (
+              <>
+                <div className="subbox-1">
+                  <h1>{songs[index].name}</h1>
+                </div>
+                <div className="subbox-2">
+                  <Youtubeplayer
+                    song={songs[index]}
+                    handleNext={handleNext}
+                    onPlay={handlebug}
+                    index={index}
+                    volume={volume}
+                    playing={playing}
+                  />
+                </div>
+                <div className="subbox-3">
+                  <ContinuousSlider
+                    handleChange={handleChange}
+                    value={volume}
+                  />
+                </div>
+              </>
             ) : (
-              <h3>0</h3>
+              <img src={fakeplayer} alt="fakeplayer" />
             )}
           </div>
-          <div className="subbox-2">
-            <Popup
-              title="Add Song"
-              pop={<SongForm addsong={addsong} listid={songlistid} />}
-              show={show}
-              onHide={onHide}
-            />
 
-            <Icon.PlusSquareFill
-              className="button"
-              onClick={() => {
-                setShow(true);
-              }}
-            ></Icon.PlusSquareFill>
+          <div className="box2">
+            <div className="subbox-1">
+              {songs.length ? (
+                <h3>
+                  {index + 1}/{songs.length}
+                </h3>
+              ) : (
+                <h3>0</h3>
+              )}
+            </div>
+            <div className="subbox-2">
+              <Popup
+                title="Add Song"
+                pop={<SongForm addsong={addsong} listid={songlistid} />}
+                show={show}
+                onHide={onHide}
+              />
 
-            <Icon.Shuffle className="button" onClick={() => shuffle(songs)}>
-              {" "}
-            </Icon.Shuffle>
-          </div>
+              <Icon.PlusSquareFill
+                className="button"
+                onClick={() => {
+                  setShow(true);
+                }}
+              ></Icon.PlusSquareFill>
 
-          <div className="aside">
-            <Drag
-              songs={songs}
-              listid={songlistid}
-              handlePlay={handlePlay}
-              removeSong={removeSong}
-            />
+              <Icon.Shuffle className="button" onClick={() => shuffle(songs)}>
+                {" "}
+              </Icon.Shuffle>
+            </div>
+
+            <div className="aside">
+              <Drag
+                songs={songs}
+                listid={songlistid}
+                handlePlay={handlePlay}
+                removeSong={removeSong}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div class="loader">Loading...</div>
+      )}
     </React.Fragment>
-    // <h1>123</h1>
   );
 };
 

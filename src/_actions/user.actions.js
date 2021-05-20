@@ -16,9 +16,11 @@ function login(username, password) {
         userService.login(username, password)
         .then(
             user => { 
-                dispatch(getSongLists(user._id));              
-                dispatch(success(user));
-                history.push('/home');
+                setTimeout(()=>{
+
+                    dispatch(success(user));
+                    history.push('/home');
+                },500)                
             }
         ).catch(error =>{
             dispatch(failure(error.message));})  

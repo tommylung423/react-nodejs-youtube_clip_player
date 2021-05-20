@@ -14,24 +14,25 @@ export default function SongListCard(props) {
 
   return (
     <div>
-      <Card style={{ textAlign: "center", height: "10em" }}>
-        <Card.Body>
-          <Card.Title style={{ fontSize: "175%" }}>{song.name}</Card.Title>
-
-          <Button
-            variant="primary"
-            onClick={() => props.onButton(song)}
-            style={{ marginTop: "0.5em" }}
-          >
-            Go somewhere
-          </Button>
+      <Card style={{ height: "13rem" }}>
+        <Card.Body style={{ paddingTop: "auto", paddingBottom: "auto" }}>
+          <div style={{ textAlign: "center" }}>
+            <Card.Title style={{ fontSize: "175%" }}>{song.name}</Card.Title>
+            <Button
+              variant="primary"
+              onClick={() => props.onButton(song)}
+              style={{ marginTop: "0.5em" }}
+            >
+              Go somewhere
+            </Button>
+          </div>
         </Card.Body>
         <Card.Footer
           className="text-right"
           style={{ background: "#ffffff", border: "none" }}
         >
           <Icon.FileText
-            style={{ fontSize: "22px" }}
+            style={{ fontSize: "20px" }}
             onClick={() => setShow(true)}
           />
           <Popup
